@@ -1,10 +1,10 @@
 NAME	:= FDF
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -w
+CFLAGS	:= -Wextra -Wall -Werror #-Wunreachable-code -Ofast -w
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= libft.a
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
-LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm $(LIBFT)
+LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -mmacosx-version-min=12.6 $(LIBFT)
 SRCS	:= main.c
 OBJS	:= $(SRCS:.c=.o)
 GIT     := 	if [ -d $(LIBMLX) ]; \
@@ -29,7 +29,7 @@ libft:
 	@echo "...Compiling: $(notdir $<)"
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) 
 
 clean:
 	@rm -rf $(OBJS)
