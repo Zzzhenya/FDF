@@ -1,4 +1,4 @@
-NAME	:= FDF
+NAME	:= fdf
 CFLAGS	:= -Wextra -Wall -Werror #-Wunreachable-code -Ofast -w
 LIBMLX	:= ./lib/MLX42
 LIBFT	:= libft.a
