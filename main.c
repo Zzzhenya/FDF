@@ -28,11 +28,12 @@ int32_t launch_mlx_window(void)
 	return (EXIT_SUCCESS);
 }
 
-int	check_for_shape(int fd)
+int	check_for_shape(int fd, t_obj map)
 {
 	char	*line;
 	char	**arr;
-	int cols;
+	int 	cols;
+	int 	rows;
 
 	line = get_next_line(fd);
 	if (!line)
@@ -44,24 +45,65 @@ int	check_for_shape(int fd)
 	cols = 0;
 	while (arr[cols])
 		cols ++;
-	ft_printf("cols: %d\n", cols);
+	map.x_max = cols;
+	while (cols > -1)
+	{
+		free(arr[cols]);
+		cols --;
+	}
+	rows = 0;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break;
+		arr = ft_split(line, ' ');
+		cols = 0;
+		while (arr[cols])
+			cols ++;
+		if (cols < map.x_max || cols > map.x_max)
+		{
+			while (cols > -1)
+			{
+				free(arr[cols]);
+				cols --;
+			}
+			free(line);
+			return (-1);
+		}
+		else
+		{
+			while (cols > -1)
+			{
+				free(arr[cols]);
+				cols --;
+			}
+		}
+		free(line);
+		rows ++;
+	}
+	map.y_max = rows;
+	ft_printf("cols :%d\nrows :%d\n", map.x_max, map.y_max);
 	return (1);
 }
 
 void ft_fdf(char *str)
 {
-	int fd;
+	int 	fd;
+	t_obj	map;
 
+
+	map.y_max = 0;
+	map.x_max = 0;
 	if (!ft_strstr(str, ".fdf"))
 		ft_errexit("Incorrect file type. It should be .fdf");
 	fd = open (str, O_RDONLY);
 	if (fd < 0)
 		ft_errexit("open() error.");
 	ft_printf("... %s file exists.\n", str);
-	if (check_for_shape(fd) < 0)
+	if (check_for_shape(fd, map) < 0)
 		ft_errexit("Map is not a rectangle.");
-	// check for rectangle
-	// check for number
+	// map is not numeric
 	ft_printf("... %s is a valid map.\n", str);
 	if (close (fd) < 0)
 		ft_errexit("close() error.");
