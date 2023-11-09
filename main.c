@@ -17,7 +17,6 @@ int	ft_strstr(const char *haystack, const char *needle)
 		return (1);
 	else
 		return (0);
-
 }
 
 int32_t launch_mlx_window(void)
@@ -29,24 +28,24 @@ int32_t launch_mlx_window(void)
 	return (EXIT_SUCCESS);
 }
 
+void	err_exit(char *msg)
+{
+	ft_printf ("%s\n", msg);
+	exit (EXIT_FAILURE);
+}
+
 void ft_parse_map(char *str)
 {
 	int fd;
 
 	if (!ft_strstr(str, ".fdf"))
-	{
-		ft_printf("Incorrect file type. It should be .fdf\n");
-		exit(0);
-	}
+		err_exit("Incorrect file type. It should be .fdf");
 	fd = open (str, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_printf("open() error. \n");
-		if (close(fd) < 0)
-			ft_printf("close() error. \n");
-		exit(0);
-	}
+		err_exit("open() error.");
 	ft_printf("... %s file exists.\n", str);
+	/*if (close(fd) < 0)
+			ft_printf("close() error. \n");*/
 	ft_printf("... %s is a valid map.\n", str);
 	ft_printf("... %s is parsed and saved.\n", str);
 }
