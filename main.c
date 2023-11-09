@@ -28,34 +28,51 @@ int32_t launch_mlx_window(void)
 	return (EXIT_SUCCESS);
 }
 
-void	err_exit(char *msg)
+int	check_for_shape(int fd)
 {
-	ft_printf ("%s\n", msg);
-	exit (EXIT_FAILURE);
+	char	*line;
+	char	**arr;
+	int cols;
+
+	line = get_next_line(fd);
+	if (!line)
+	{
+		close (fd);
+		ft_errexit("Map is empty.");
+	}
+	arr = ft_split(line, ' ');
+	cols = 0;
+	while (arr[cols])
+		cols ++;
+	ft_printf("cols: %d\n", cols);
+	return (1);
 }
 
-void ft_parse_map(char *str)
+void ft_fdf(char *str)
 {
 	int fd;
 
 	if (!ft_strstr(str, ".fdf"))
-		err_exit("Incorrect file type. It should be .fdf");
+		ft_errexit("Incorrect file type. It should be .fdf");
 	fd = open (str, O_RDONLY);
 	if (fd < 0)
-		err_exit("open() error.");
+		ft_errexit("open() error.");
 	ft_printf("... %s file exists.\n", str);
-	/*if (close(fd) < 0)
-			ft_printf("close() error. \n");*/
+	if (check_for_shape(fd) < 0)
+		ft_errexit("Map is not a rectangle.");
+	// check for rectangle
+	// check for number
 	ft_printf("... %s is a valid map.\n", str);
+	if (close (fd) < 0)
+		ft_errexit("close() error.");
 	ft_printf("... %s is parsed and saved.\n", str);
 }
 
-
-int32_t	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc == 2)
 	{
-		ft_parse_map(argv[1]);
+		ft_fdf(argv[1]);
 		ft_printf("...Initializing %s\n", argv[1]);
 		launch_mlx_window();
 	}
