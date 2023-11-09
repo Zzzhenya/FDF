@@ -7,4 +7,10 @@
 # define WIDTH 256
 # define HEIGHT 256
 
+typedef struct s_obj
+{
+	int			x_max;
+	int			y_max;
+}					t_obj;
+
 #endif
