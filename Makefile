@@ -25,11 +25,11 @@ libft:
 	@cp lib/libft/libft.h include/libft.h
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	@$(CC) -g $(CFLAGS) -o $@ -c $< $(HEADERS)
 	@echo "...Compiling: $(notdir $<)"
 
 $(NAME): $(OBJS)
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) 
+	@$(CC) -g $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) 
 
 clean:
 	@rm -rf $(OBJS)
