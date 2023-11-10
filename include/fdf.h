@@ -9,8 +9,11 @@
 
 typedef struct s_obj
 {
-	int			x_max;
-	int			y_max;
+	int				x_max;
+	int				y_max;
+	int				*x;
+	int				*y;
+	int				*z;
 }					t_obj;
 
 #endif

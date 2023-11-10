@@ -1,5 +1,7 @@
 #include "fdf.h"
 
+static mlx_image_t *g_img;
+
 static int	ft_strstr(const char *haystack, const char *needle)
 {
 	size_t		i;
@@ -19,10 +21,16 @@ static int	ft_strstr(const char *haystack, const char *needle)
 		return (0);
 }
 
-int launch_mlx_window(void)
+int launch_mlx_window(t_obj	map)
 {
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Wireframe", true);
+	mlx_t *mlx; // mlx.display = display
+	
+	mlx = mlx_init(WIDTH, HEIGHT, "Wireframe", true);
+	g_img = mlx_new_image(mlx, 128, 128);   // Creates a new image.
+    mlx_image_to_window(mlx, g_img, 0, 0);  // Adds an image to the render queue.
+    mlx_put_pixel(g_img, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
 	mlx_loop(mlx);
+	mlx_delete_image(mlx, g_img); // Once the application request an exit, cleanup.
 	ft_printf("... fdf shutdown. See you tomorrow!\n");
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
@@ -119,6 +127,7 @@ void ft_fdf(char *str)
 	ft_printf("... %s is a valid map.\n", str);*/
 
 	ft_printf("... %s is parsed and saved.\n", str);
+	launch_mlx_window(map);
 }
 
 int	main(int argc, char **argv)
@@ -127,7 +136,6 @@ int	main(int argc, char **argv)
 	{
 		ft_fdf(argv[1]);
 		ft_printf("...Initializing %s\n", argv[1]);
-		launch_mlx_window();
 	}
 	else
 		ft_printf("Usage: ./fdf <mapfile name>\n");
