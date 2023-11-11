@@ -29,6 +29,7 @@ int launch_mlx_window(t_obj	map)
 	g_img = mlx_new_image(mlx, 128, 128);   // Creates a new image.
     mlx_image_to_window(mlx, g_img, 0, 0);  // Adds an image to the render queue.
     mlx_put_pixel(g_img, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
+	ft_printf("cols :%d\nrows :%d\n", map.x_max, map.y_max);
 	mlx_loop(mlx);
 	mlx_delete_image(mlx, g_img); // Once the application request an exit, cleanup.
 	ft_printf("... fdf shutdown. See you tomorrow!\n");
@@ -100,14 +101,11 @@ static int	check_for_shape(int fd, t_obj map)
 	return (1);
 }
 
-void ft_fdf(char *str)
+void ft_fdf(char *str, t_obj *map)
 {
 	int 	fd;
-	t_obj	map;
 
 
-	map.y_max = 0;
-	map.x_max = 0;
 	if (!ft_strstr(str, ".fdf"))
 		ft_errexit("Incorrect file type. It should be a .fdf");
 	ft_printf("... Correct file type.\n", str);
@@ -117,7 +115,7 @@ void ft_fdf(char *str)
 		ft_errexit("open() error.");
 	ft_printf("... %s file exists.\n", str);
 
-	if (check_for_shape(fd, map) < 0)
+	if (check_for_shape(fd, *map) < 0)
 		ft_errexit("Map is not a rectangle.");
 	ft_printf("... %s is a rectangular map.\n", str);
 
@@ -127,14 +125,18 @@ void ft_fdf(char *str)
 	ft_printf("... %s is a valid map.\n", str);*/
 
 	ft_printf("... %s is parsed and saved.\n", str);
-	launch_mlx_window(map);
 }
 
 int	main(int argc, char **argv)
 {
+	t_obj	map;
+
 	if (argc == 2)
 	{
-		ft_fdf(argv[1]);
+		ft_fdf(argv[1], &map);
+		map.y_max = 0;
+		map.x_max = 0;
+		launch_mlx_window(map);
 		ft_printf("...Initializing %s\n", argv[1]);
 	}
 	else
