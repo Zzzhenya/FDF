@@ -16,4 +16,8 @@ typedef struct s_obj
 	int				*z;
 }					t_obj;
 
+/* ft_map_parser.c */
+void ft_fdf(char *str, t_obj *map);
+
+
 #endif

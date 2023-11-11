@@ -5,7 +5,7 @@ LIBFT	:= libft.a
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -mmacosx-version-min=12.6 $(LIBFT)
-SRCS	:= main.c 
+SRCS	:= main.c ft_map_parser.c
 OBJS	:= $(SRCS:.c=.o)
 GIT     := 	if [ -d $(LIBMLX) ]; \
 			then git -C $(LIBMLX) pull; \
