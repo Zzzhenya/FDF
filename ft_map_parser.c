@@ -52,14 +52,14 @@ static int check_first_line (int fd)
 }
 
 /* Parse through the rest of the map store height of map */
-static int	check_for_shape(int fd, t_obj map)
+int	check_for_shape(int fd, t_obj *map)
 {
 	char	*line;
 	char	**arr;
 	int 	cols;
 	int 	rows;
 
-	map.x_max = check_first_line(fd);
+	(*map).x_max = check_first_line(fd);
 	rows = 0;
 	while (1)
 	{
@@ -70,7 +70,7 @@ static int	check_for_shape(int fd, t_obj map)
 		cols = 0;
 		while (arr[cols])
 			cols ++;
-		if (cols < map.x_max || cols > map.x_max)
+		if (cols < (*map).x_max || cols > (*map).x_max)
 		{
 			free_arr (arr, cols);
 			free(line);
@@ -82,8 +82,8 @@ static int	check_for_shape(int fd, t_obj map)
 		free(line);
 		rows ++;
 	}
-	map.y_max = rows;
-	ft_printf("cols :%d\nrows :%d\n", map.x_max, map.y_max);
+	(*map).y_max = rows;
+	ft_printf("cols :%d\nrows :%d\n", (*map).x_max, (*map).y_max);
 	return (1);
 }
 
@@ -94,16 +94,17 @@ void ft_fdf(char *str, t_obj *map)
 
 	if (!ft_strstr(str, ".fdf"))
 		ft_errexit("Incorrect file type. It should be a .fdf");
-	ft_printf("... Correct file type.\n", str);
+	ft_printf("... File type checked.\n", str);
 
 	fd = open (str, O_RDONLY);
+
 	if (fd < 0)
 		ft_errexit("open() error.");
-	ft_printf("... %s file exists.\n", str);
+	ft_printf("... %s File checked.\n", str);
 
-	if (check_for_shape(fd, *map) < 0)
+	if (check_for_shape(fd, map) < 0)
 		ft_errexit("Map is not a rectangle.");
-	ft_printf("... %s is a rectangular map.\n", str);
+	ft_printf("... %s Map rectangular\n", str);
 
 	/* check for numeric values, NULL, INT MAX and INT MIN
 	if (parse_and_store(str, map) < 0)

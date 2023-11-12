@@ -1,10 +1,9 @@
 #include "fdf.h"
 
-static mlx_image_t *g_img;
-
 int launch_mlx_window(t_obj	map)
 {
 	mlx_t *mlx; // mlx.display = display
+	mlx_image_t *g_img;
 	
 	mlx = mlx_init(WIDTH, HEIGHT, "Wireframe", true);
 	g_img = mlx_new_image(mlx, 128, 128);   // Creates a new image.
@@ -24,9 +23,9 @@ int	main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		ft_fdf(argv[1], &map);
 		map.y_max = 0;
 		map.x_max = 0;
+		ft_fdf(argv[1], &map);
 		launch_mlx_window(map);
 		ft_printf("...Initializing %s\n", argv[1]);
 	}
