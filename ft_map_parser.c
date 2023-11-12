@@ -59,6 +59,35 @@ int	check_for_shape(int fd, t_obj *map)
 
 void	parse_and_store(char *str,t_obj *map)
 {
+	int		fd;
+	char	*line;
+	char 	**arr;
+	int		rows;
+	int cols;
+
+	fd = open (str, O_RDONLY);
+	rows = 0;
+	(*map).coord = malloc((*map).y_max * sizeof(int *));
+	while (rows < (*map).y_max)
+	{
+		(*map).coord[rows] = malloc((*map).x_max * sizeof(int));
+		ft_printf("rows: %d\n", rows + 1);
+		line = get_next_line(fd);
+		ft_printf("line: %s\n", line);
+		arr = ft_split(line, ' ');
+		free (line);
+		cols = 0;
+		while (cols < (*map).x_max)
+		{
+			(*map).coord[rows][cols] = ft_atoi(arr[cols]);
+			//ft_printf("%d\n" ,ft_atoi(split[cols]));
+			free(arr[cols]);
+			cols ++;
+		}
+		free(arr);
+		rows ++;
+	}
+	close(fd);
 	/*
 	open()
 	read line by line -> store in char pointer

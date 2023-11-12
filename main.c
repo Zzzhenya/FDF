@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 		map.y_max = 0;
 		map.x_max = 0;
 		ft_fdf(argv[1], &map);
-		launch_mlx_window(map);
+		//launch_mlx_window(map);
 		ft_printf("...Initializing %s\n", argv[1]);
 	}
 	else
