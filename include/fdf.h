@@ -17,7 +17,12 @@ typedef struct s_obj
 }					t_obj;
 
 /* ft_map_parser.c */
-void ft_fdf(char *str, t_obj *map);
+void	ft_fdf(char *str, t_obj *map);
+int		check_for_shape(int fd, t_obj *map);
+void		parse_and_store(char *str,t_obj *map);
 
+/* ft_parser_utils.c */
+int		ft_strstr(const char *haystack, const char *needle);
+void	free_arr(char **arr, int cols);
 
 #endif
