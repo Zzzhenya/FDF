@@ -54,10 +54,11 @@ int	check_for_shape(int fd, t_obj *map)
 	}
 	(*map).y_max = rows;
 	ft_printf("cols :%d\nrows :%d\n", (*map).x_max, (*map).y_max);
+	close(fd);
 	return (1);
 }
 
-void	parse_and_store(char *str,t_obj *map)
+void	parse_and_store(char *str, t_obj *map)
 {
 	int		fd;
 	char	*line;
