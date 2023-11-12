@@ -4,6 +4,7 @@
 # include "MLX42/MLX42.h"
 # include "libft.h"
 # include <fcntl.h>
+# include <math.h>
 # define WIDTH 256
 # define HEIGHT 256
 
@@ -11,9 +12,7 @@ typedef struct s_obj
 {
 	int				x_max;
 	int				y_max;
-	int				*x;
-	int				*y;
-	int				*z;
+	int				**coord;
 }					t_obj;
 
 /* ft_map_parser.c */

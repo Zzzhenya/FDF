@@ -8,8 +8,10 @@ int launch_mlx_window(t_obj	map)
 	mlx = mlx_init(WIDTH, HEIGHT, "Wireframe", true);
 	g_img = mlx_new_image(mlx, 128, 128);   // Creates a new image.
     mlx_image_to_window(mlx, g_img, 0, 0);  // Adds an image to the render queue.
+    // Draw pixels
     mlx_put_pixel(g_img, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
 	ft_printf("cols :%d\nrows :%d\n", map.x_max, map.y_max);
+	// Connect the dots here
 	mlx_loop(mlx);
 	mlx_delete_image(mlx, g_img); // Once the application request an exit, cleanup.
 	ft_printf("... fdf shutdown. See you tomorrow!\n");

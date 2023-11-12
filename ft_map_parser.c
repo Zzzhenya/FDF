@@ -59,6 +59,12 @@ int	check_for_shape(int fd, t_obj *map)
 
 void	parse_and_store(char *str,t_obj *map)
 {
+	/*
+	open()
+	read line by line -> store in char pointer
+	convert line to array of ints
+	convert the numbers to 
+	*/
 	ft_printf("map name: %s\n", str);
 	ft_printf("cols :%d\nrows :%d\n", (*map).x_max, (*map).y_max);
 }
