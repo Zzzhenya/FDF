@@ -7,22 +7,21 @@ void draw_verts(t_obj *map, mlx_image_t *g_img)
 	int x_val;
 	int y_val;
 
-	x = 0;
-	while (x < (*map).y_max)
+	y = 0;
+	while (y < (*map).y_max)
 	{
-		y = 0;
-		while (y < (*map).x_max)
+		x = 0;
+		while (x < (*map).x_max)
 		{
-			x_val = x + cos(120) * (*map).coord[x][y];
-			y_val = y + sin(120) * (*map).coord[x][y];
+			y_val = (y + cos(120) * (*map).coord[y][x]) * 20;
+			x_val = (x + sin(120) * (*map).coord[y][x]) * 20;
 			ft_printf("x,y : (%d , %d)\n", x_val, y_val);
 			mlx_put_pixel(g_img, x_val, y_val, 0xFFFFFFFF);
-			y ++;
+			x ++;
 		}
-		x ++;
+		y ++;
 	}
 }
-
 
 int launch_mlx_window(t_obj	*map)
 {
@@ -30,10 +29,10 @@ int launch_mlx_window(t_obj	*map)
 	mlx_image_t *g_img;
 	
 	mlx = mlx_init(WIDTH, HEIGHT, "Wireframe", true);
-	g_img = mlx_new_image(mlx, 128, 128);   // Creates a new image.
-    mlx_image_to_window(mlx, g_img, 64, 64);  // Adds an image to the render queue.
+	g_img = mlx_new_image(mlx, WIDTH, HEIGHT);   // Creates a new image.
+    mlx_image_to_window(mlx, g_img, 100, 100);  // Adds an image to the render queue.
     // Draw pixels
-    //mlx_put_pixel(g_img, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
+    mlx_put_pixel(g_img, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
     draw_verts(map, g_img);
 	ft_printf("cols :%d\nrows :%d\n", (*map).x_max, (*map).y_max);
 	// Connect the dots here
@@ -53,6 +52,7 @@ int	main(int argc, char **argv)
 		map.y_max = 0;
 		map.x_max = 0;
 		ft_fdf(argv[1], &map);
+		//calc_iso_coords(&map);
 		launch_mlx_window(&map);
 		//draw_verts(&map);
 		ft_printf("...Initializing %s\n", argv[1]);
