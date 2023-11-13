@@ -11,41 +11,29 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*
-void ft_init_iso(t_obj *map)
-{
-	
-	linked list of t_verts as void *content
-	size of (y_max * x_max) long
-	
-	t_vert vert;
-	vert = malloc(sizeof (t_vert));
-	vert.x = x_val;
-	vert.y = y_val;
-	(*map).iso = ft_ft_lstnew(void *(vert));
-}
-
+#include <stdio.h>
 
 void calc_iso_coords(t_obj *map)
 {
-	int x;
-	int y;
-	int x_val;
-	int y_val;
+	int col;
+	int row;
+	int i;
 
-	x = 0;
-	while (x < (*map).y_max)
+	i = 0;
+	map->iso = malloc(map->x_max * map->y_max * (sizeof(t_vert)));
+	row = 0;
+	while (row < (*map).y_max)
 	{
-		y = 0;
-		while (y < (*map).x_max)
+		col = 0;
+		while (col < (*map).x_max)
 		{
-			x_val = x + cos(120) * (*map).coord[x][y];
-			y_val = y + sin(120) * (*map).coord[x][y];
-			ft_printf("x,y : (%d , %d)\n", x_val, y_val);
-			mlx_put_pixel(g_img, x_val, y_val, 0xFFFFFFFF);
-			y ++;
+			map->iso[i].x = (col + sin(120) * (*map).coord[row][col]) * 40;
+			map->iso[i].y = (row + cos(120) * (*map).coord[row][col]) * 40;
+			printf("x,y : (%f , %f)\n", map->iso[i].x, map->iso[i].y);
+			col ++;
+			i ++;
 		}
-		x ++;
+		row ++;
 	}
 }
-*/
+

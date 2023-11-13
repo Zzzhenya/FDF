@@ -76,7 +76,7 @@ void	parse_and_store(char *str, t_obj *map)
 	char	*line;
 	char 	**arr;
 	int		rows;
-	int cols;
+	int 	cols;
 
 	fd = open (str, O_RDONLY);
 	rows = 0;
@@ -101,12 +101,6 @@ void	parse_and_store(char *str, t_obj *map)
 		rows ++;
 	}
 	close(fd);
-	/*
-	open()
-	read line by line -> store in char pointer
-	convert line to array of ints
-	convert the numbers to 
-	*/
 	ft_printf("map name: %s\n", str);
 	ft_printf("cols :%d\nrows :%d\n", (*map).x_max, (*map).y_max);
 }

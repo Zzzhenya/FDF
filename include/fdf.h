@@ -22,8 +22,8 @@
 
 typedef struct s_vert
 {
-	int 		x;
-	int 		y;
+	float 		x;
+	float 		y;
 }				t_vert;
 
 typedef struct s_obj
@@ -31,7 +31,8 @@ typedef struct s_obj
 	int				x_max;
 	int				y_max;
 	int				**coord;
-	t_list			*iso;
+	float			alpha;
+	t_vert			*iso;
 }					t_obj;
 
 /* ft_map_parser.c */
@@ -44,6 +45,6 @@ int		ft_strstr(const char *haystack, const char *needle);
 void	free_arr(char **arr, int cols);
 
 /* ft_calc_iso_coords.c */
-void 	calc_iso_coords(t_obj *map);
+void calc_iso_coords(t_obj *map);
 
 #endif
