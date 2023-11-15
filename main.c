@@ -59,7 +59,8 @@ int launch_mlx_window(t_obj	*map)
 	
 	mlx = mlx_init(WIDTH, HEIGHT, "Wireframe", true);
 	g_img = mlx_new_image(mlx, WIDTH, HEIGHT);   // Creates a new image.
-    mlx_image_to_window(mlx, g_img, 100, 100);  // Adds an image to the render queue.
+	mlx_image_to_window(mlx, g_img, WIDTH* 2/5, HEIGHT * 2/5);  // Adds an image to the render queue.
+//    mlx_image_to_window(mlx, g_img, 0, 0);  // Adds an image to the render queue.
     // Draw pixels
     //mlx_put_pixel(g_img, 64, 64, 0xFFFFFFFF); // Single white pixel in the middle.
     draw_verts(map, g_img);
@@ -80,7 +81,7 @@ int	main(int argc, char **argv)
 	{
 		map.y_max = 0;
 		map.x_max = 0;
-		map.alpha = 7.37;
+		map.alpha = 190 * M_PI / 180;
 		ft_fdf(argv[1], &map);
 		calc_iso_coords(&map);
 		launch_mlx_window(&map);
