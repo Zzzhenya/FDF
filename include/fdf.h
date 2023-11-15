@@ -38,7 +38,7 @@ typedef struct s_obj
 /* ft_map_parser.c */
 void	ft_fdf(char *str, t_obj *map);
 int		check_for_shape(int fd, t_obj *map, char *str);
-void		parse_and_store(char *str,t_obj *map);
+void		parse_and_store(t_obj *map, int fd);
 
 /* ft_parser_utils.c */
 int		ft_strstr(const char *haystack, const char *needle);
