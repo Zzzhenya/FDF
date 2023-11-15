@@ -39,10 +39,8 @@ int	check_for_shape(int fd, t_obj *map)
 	char	*line;
 	char	**arr;
 	int 	cols;
-	int 	rows;
 
 	(*map).x_max = check_first_line(fd);
-	rows = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -62,9 +60,8 @@ int	check_for_shape(int fd, t_obj *map)
 		else
 			free_arr (arr, cols);
 		free(line);
-		rows ++;
+		(*map).y_max ++;
 	}
-	(*map).y_max = rows;
 	ft_printf("cols :%d\nrows :%d\n", (*map).x_max, (*map).y_max);
 	close(fd);
 	return (1);
