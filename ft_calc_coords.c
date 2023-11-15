@@ -27,8 +27,8 @@ void calc_iso_coords(t_obj *map)
 		col = 0;
 		while (col < (*map).x_max)
 		{
-			map->iso[i].x = (col + sin(120) * (*map).coord[row][col]) * 40;
-			map->iso[i].y = (row + cos(120) * (*map).coord[row][col]) * 40;
+			map->iso[i].x = (col + cos(120) * (*map).coord[row][col]) * 30;
+			map->iso[i].y = (row + sin(120) * (*map).coord[row][col]) * 30;
 			printf("x,y : (%f , %f)\n", map->iso[i].x, map->iso[i].y);
 			col ++;
 			i ++;

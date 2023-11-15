@@ -18,7 +18,7 @@
 # include <fcntl.h>
 # include <math.h>
 # define WIDTH 1024
-# define HEIGHT 1024
+# define HEIGHT 720
 
 typedef struct s_vert
 {
@@ -38,13 +38,13 @@ typedef struct s_obj
 /* ft_map_parser.c */
 void	ft_fdf(char *str, t_obj *map);
 int		check_for_shape(int fd, t_obj *map, char *str);
-void		parse_and_store(t_obj *map, int fd);
+void	parse_and_store(t_obj *map, int fd);
 
 /* ft_parser_utils.c */
 int		ft_strstr(const char *haystack, const char *needle);
 void	free_arr(char **arr, int cols);
 
 /* ft_calc_iso_coords.c */
-void calc_iso_coords(t_obj *map);
+void 	calc_iso_coords(t_obj *map);
 
 #endif
