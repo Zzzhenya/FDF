@@ -13,9 +13,8 @@
 #include "fdf.h"
 
 /* Parse through the first line and store width of map*/
-static int check_first_line (int fd)
+static int check_first_line (int fd, t_obj *map)
 {
-	int 	cols;
 	char	**arr;
 	char 	*line;
 
@@ -26,21 +25,22 @@ static int check_first_line (int fd)
 		ft_errexit("Map is empty.");
 	}
 	arr = ft_split(line, ' ');
-	cols = 0;
-	while (arr[cols])
-		cols ++;
-	free_arr (arr, cols);
-	return (cols);
+	while (arr[(*map).x_max])
+		(*map).x_max ++;
+	free_arr (arr, (*map).x_max);
+	close(fd);
+	return ((*map).x_max);
 }
 
 /* Parse through the rest of the map store height of map */
-int	check_for_shape(int fd, t_obj *map)
+int	check_for_shape(int fd, t_obj *map, char *str)
 {
 	char	*line;
 	char	**arr;
 	int 	cols;
 
-	(*map).x_max = check_first_line(fd);
+	(*map).x_max = check_first_line(fd, map);
+	fd = open (str, O_RDONLY);
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -87,7 +87,7 @@ void	parse_and_store(char *str, t_obj *map)
 		arr = ft_split(line, ' ');
 		free (line);
 		cols = 0;
-		while (cols < (*map).x_max)
+		while (cols < (*map).x_max)	
 		{
 			(*map).coord[rows][cols] = ft_atoi(arr[cols]);
 			//ft_printf("%d\n" ,ft_atoi(split[cols]));
@@ -117,7 +117,7 @@ void ft_fdf(char *str, t_obj *map)
 		ft_errexit("open() error.");
 	ft_printf("... %s File checked.\n", str);
 
-	if (check_for_shape(fd, map) < 0)
+	if (check_for_shape(fd, map, str) < 0)
 		ft_errexit("Map is not a rectangle.");
 	ft_printf("... %s Map rectangular\n", str);
 
