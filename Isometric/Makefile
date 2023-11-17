@@ -12,12 +12,12 @@
 
 NAME	:= fdf
 CFLAGS	:= -Wextra -Wall -Werror #-Wunreachable-code -Ofast -w
-LIBMLX	:= ./lib/MLX42
+LIBMLX	:= ../lib/MLX42
 LIBFT	:= libft.a
 
-HEADERS	:= -I ./include -I $(LIBMLX)/include
+HEADERS	:= -I ../include -I $(LIBMLX)/include
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -mmacosx-version-min=12.6 $(LIBFT)
-SRCS	:= main.c ft_map_parser.c ft_parser_utils.c ft_calc_coords.c ft_draw_image.c
+SRCS	:= main.c
 OBJS	:= $(SRCS:.c=.o)
 GIT     := 	if [ -d $(LIBMLX) ]; \
 			then git -C $(LIBMLX) pull; \
@@ -32,9 +32,9 @@ libmlx:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 libft:
-	@$(MAKE) -C ./lib/libft
-	@cp lib/libft/$(LIBFT) $(LIBFT)
-	@cp lib/libft/libft.h include/libft.h
+	@$(MAKE) -C ../lib/libft
+	@cp ../lib/libft/$(LIBFT) $(LIBFT)
+	@cp ../lib/libft/libft.h ../include/libft.h
 
 %.o: %.c
 	@$(CC) -g $(CFLAGS) -o $@ -c $< $(HEADERS)
@@ -52,8 +52,8 @@ fclean: clean
 	@echo "...FDF binary cleaned."
 	@rm -rf $(LIBMLX)/build
 	@echo "...MLX42 build files cleaned."
-	@$(MAKE) fclean -C ./lib/libft
-	@rm -f libft.a
+	@$(MAKE) fclean -C ../lib/libft
+	@rm -f ../libft.a
 
 re: clean all
 
