@@ -37,7 +37,7 @@ typedef struct s_obj
 {
 	int				x_max;
 	int				y_max;
-	//int				**coord;
+	int				**coord;
 	float			alpha;
 	t_vert			*iso;
 }					t_obj;
@@ -47,6 +47,7 @@ typedef struct s_screen
 	int 		height;
 	int 		width;
 	int 		scale;
+	t_obj		loc;
 	int 		proj;
 	t_obj 		map;
 }				t_screen;

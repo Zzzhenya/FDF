@@ -88,48 +88,6 @@ void	print_grid(t_cord *grid, int size)
 	printf("...Grid printed.\n");
 }
 
-//void	draw_pixel()
-
-/**
- * Sets / puts a pixel onto an image.
- * 
- * NOTE: It is considered undefined behaviour when putting a pixel 
- * beyond the bounds of an image.
- * 
- * @param[in] image The MLX instance handle.
- * @param[in] x The X coordinate position.
- * @param[in] y The Y coordinate position.
- * @param[in] color The color value to put.
-
-void mlx_put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color);
-
-# define MLX_ASSERT(cond, msg) assert(cond && msg);
-# define MLX_NONNULL(var) MLX_ASSERT(var, "Value can't be null"); // Assert instead of attribute 
-
-
-// BUG: Linux may experience a red hue instead due to endianness
-void mlx_draw_pixel(uint8_t* pixel, uint32_t color)
-{
-	*(pixel++) = (uint8_t)(color >> 24);
-	*(pixel++) = (uint8_t)(color >> 16);
-	*(pixel++) = (uint8_t)(color >> 8);
-	*(pixel++) = (uint8_t)(color & 0xFF);
-}
-
-//= Public =//
-
-void mlx_put_pixel(mlx_image_t* image, uint32_t x, uint32_t y, uint32_t color)
-{
-	MLX_NONNULL(image);
-	MLX_ASSERT(x < image->width, "Pixel is out of bounds");
-	MLX_ASSERT(y < image->height, "Pixel is out of bounds");
-
-	uint8_t* pixelstart = &image->pixels[(y * image->width + x) * BPP];
-	mlx_draw_pixel(pixelstart, color);
-}
-
- */
-
 void	draw_iso(mlx_image_t *g_img,t_screen *scrn, int size)
 {
 	int i;
@@ -169,7 +127,7 @@ void	mlx_initiate(t_cord *grid, int size,t_screen *scrn)
 	mlx_image_t *axis;
 	mlx_image_t *iso;
 
-	mlx = mlx_init(WIDTH, HEIGHT, "FdF", true);
+	mlx = mlx_init(WIDTH, HEIGHT, "Wireframe", true);
 	g_img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	axis = mlx_new_image(mlx, WIDTH, HEIGHT);
 	iso = mlx_new_image(mlx, WIDTH, HEIGHT);
