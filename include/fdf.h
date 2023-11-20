@@ -26,14 +26,30 @@ typedef struct s_vert
 	float 		y;
 }				t_vert;
 
+typedef struct s_cord
+{
+	int 		x;
+	int 		y;
+	int 		z;
+}				t_cord;
+
 typedef struct s_obj
 {
 	int				x_max;
 	int				y_max;
-	int				**coord;
+	//int				**coord;
 	float			alpha;
 	t_vert			*iso;
 }					t_obj;
+
+typedef struct s_screen
+{
+	int 		height;
+	int 		width;
+	int 		scale;
+	int 		proj;
+	t_obj 		map;
+}				t_screen;
 
 /* ft_map_parser.c */
 void	ft_fdf(char *str, t_obj *map);
@@ -46,5 +62,8 @@ void	free_arr(char **arr, int cols);
 
 /* ft_calc_iso_coords.c */
 void 	calc_iso_coords(t_obj *map);
+
+/* ft_draw_image.c */
+void	draw_image(t_obj *map, mlx_image_t *g_img);
 
 #endif
