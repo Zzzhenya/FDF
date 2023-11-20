@@ -62,9 +62,9 @@ void calc_iso_coords(t_obj *map)
 			map->iso[i].y = col * fabs(sinf(a)) + \
 			row * fabs(sinf(a + 2)) + \
 			(*map).coord[row][col] * fabs(sinf(a - 2)) * 1;
-			map->iso[i].x *= 10;
-			map->iso[i].y *= 10;
-			printf("x,y : (%f , %f)\n", map->iso[i].x, map->iso[i].y);
+			map->iso[i].x *= 20;
+			map->iso[i].y *= 20;
+			printf("%d x,y : (%f , %f)\n",i, map->iso[i].x, map->iso[i].y);
 			col ++;
 			i ++;
 		}
