@@ -145,6 +145,21 @@ void	mlx_initiate(t_cord *grid, int size,t_screen *scrn)
 	mlx_terminate(mlx);
 }
 
+void ft_clear_map(t_obj *map, int id)
+{
+	int i;
+
+	i = 0;
+	while (i < id * id)
+	{
+		map->iso[i].x = 0;
+		map->iso[i].y = 0;
+		i ++;
+	}
+	free(map->iso);
+	map->iso = NULL;
+}
+
 int main (void)
 {
 	t_cord	*grid;
@@ -159,6 +174,7 @@ int main (void)
 	print_grid(grid, size);
 	calc_scrn_cords(scrn, grid, size);
 	mlx_initiate(grid, size, scrn);
+	ft_clear_map(&scrn->map, size);
 	clear_grid(grid, size);
 	return (0);
 }
