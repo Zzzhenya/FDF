@@ -21,7 +21,7 @@ SRCS	:= main.c ft_map_parser.c ft_parser_utils.c ft_calc_coords.c ft_draw_image.
 OBJS	:= $(SRCS:.c=.o)
 GIT     := 	if [ -d $(LIBMLX) ]; \
 			then git -C $(LIBMLX) pull; \
-			else git clone https://github.com/codam-coding-college/MLX42.git $(LIBMLX); \
+			else git clone https://github.com/Zzzhenya/MLX42.git $(LIBMLX); \
 			fi
 
 all: libmlx libft $(NAME)
