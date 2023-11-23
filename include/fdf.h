@@ -40,6 +40,7 @@ typedef struct s_obj
 	int				**coord;
 	float			alpha;
 	t_vert			*iso;
+	t_cord			*cord;
 }					t_obj;
 
 typedef struct s_screen
@@ -52,19 +53,27 @@ typedef struct s_screen
 	t_obj 		map;
 }				t_screen;
 
+/* main.c */
+void ft_fdf(char *name, t_obj *map);
+
 /* ft_map_parser.c */
-void	ft_fdf(char *str, t_obj *map);
+void 	ft_parse(char *str, t_obj *map);
+//void	ft_fdf(char *str, t_obj *map);
 int		check_for_shape(int fd, t_obj *map, char *str);
-void	parse_and_store(t_obj *map, int fd);
+void	parse_and_store(t_obj *map, int fd); // Need to remove this;
+int	store_3d_cords(t_obj *map, int fd, int i);
 
 /* ft_parser_utils.c */
 int		ft_strstr(const char *haystack, const char *needle);
 void	free_arr(char **arr, int cols);
+void	print_t_cord(t_obj *map);
 
 /* ft_calc_iso_coords.c */
 void 	calc_iso_coords(t_obj *map);
+int calc_screen_cords(t_obj *map, t_screen *scrn);
 
 /* ft_draw_image.c */
 void	draw_image(t_obj *map, mlx_image_t *g_img);
+void	draw_verts(t_obj *map, mlx_image_t *g_img);
 
 #endif

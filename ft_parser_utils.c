@@ -41,3 +41,20 @@ void	free_arr(char **arr, int cols)
 		cols --;
 	}
 }
+
+void	print_t_cord(t_obj *map)
+{
+	int i;
+
+	i = 0;
+	if (!map->cord)
+		return ;
+	while (i < map->x_max * map->y_max)
+	{
+		ft_printf("%d,(%d,%d,%d)\n", i,
+			map->cord[i].x,
+			map->cord[i].y,
+			map->cord[i].z);
+		i ++;
+	}
+}

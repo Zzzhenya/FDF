@@ -14,24 +14,6 @@
 #include <stdio.h>
 
 
-void draw_verts(t_obj *map, mlx_image_t *g_img)
-{
-	int i;
-
-	i = 0;
-	while (i < (*map).y_max * (*map).x_max)
-	{
-		if (map->iso[i].x <= WIDTH && map->iso[i].x >= 0)
-		{
-			if  (map->iso[i].y <= HEIGHT  && map->iso[i].y >= 0)
-			{
-				mlx_put_pixel(g_img, map->iso[i].x, map->iso[i].y, 0xFFFFFFFF);
-			}
-		}
-		i ++;
-	}
-}
-
 int launch_mlx_window(t_obj	*map)
 {
 	mlx_t *mlx; // mlx.display = display
@@ -52,19 +34,54 @@ int launch_mlx_window(t_obj	*map)
 	return (EXIT_SUCCESS);
 }
 
+void ft_fdf(char *name, t_obj *map)
+{
+	int fd;
+
+	ft_parse(name, map);
+	fd = open (name, O_RDONLY);
+	if (fd < 0)
+		ft_errexit("open() error.");
+	if (store_3d_cords(map, fd, 0) < 0)
+	{
+		close(fd);
+		ft_errexit("3d cordinates storage error");
+	}
+	close(fd);
+	print_t_cord(map); // Need to remove this _ only for debugging
+	/*fd = open (name, O_RDONLY);
+	if (fd < 0)
+		ft_errexit("open() error.");
+	parse_and_store(map, fd); // Need to remove this _ only for debugging
+	ft_printf("... %s is parsed and saved.\n", name);*/
+}
+/*
+int clear_stuff(t_screen *scrn)
+{
+	ft_clear_coords(&scrn->map);
+	ft_clear_map(&scrn->map);
+	ft_printf("...Initializing %s\n", &scrn->map.name);
+	return (0);
+}*/
+
 int	main(int argc, char **argv)
 {
-	//t_obj	map;
 	t_screen scrn;
 
 	if (argc == 2)
 	{
 		scrn.map.y_max = 0;
 		scrn.map.x_max = 0;
+		scrn.scale = 20;
 		//map.alpha = atan2((HEIGHT/2),(WIDTH/2));
 		scrn.map.alpha = 190 * M_PI / 180;
 		ft_fdf(argv[1], &scrn.map);
-		calc_iso_coords(&scrn.map);
+		//calc_iso_coords(&scrn.map);
+		if (calc_screen_cords(&scrn.map, &scrn) < 0)
+		{
+			//clear 3d map
+			ft_errexit("Screen coordinates calc error.");
+		}
 		launch_mlx_window(&scrn.map);
 		//draw_verts(&map);
 		ft_printf("...Initializing %s\n", argv[1]);
