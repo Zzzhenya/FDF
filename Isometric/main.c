@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "fdf.h"
+#include "iso.h"
 #include <math.h>
 
 void 	clear_grid(t_cord *grid, int size)

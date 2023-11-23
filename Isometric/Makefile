@@ -15,7 +15,7 @@ CFLAGS	:= -Wextra -Wall -Werror #-Wunreachable-code -Ofast -w
 LIBMLX	:= ../lib/MLX42
 LIBFT	:= libft.a
 
-HEADERS	:= -I ../include -I $(LIBMLX)/include
+HEADERS	:= -I ../include -I $(LIBMLX)/include 
 LIBS	:= $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -mmacosx-version-min=12.6 $(LIBFT)
 SRCS	:= main.c
 OBJS	:= $(SRCS:.c=.o)
