@@ -43,8 +43,8 @@ To transform a(x,y,z) in 3D space to b(x,y) in 2D space looking into 1st octant;
 2. A rotation around horizontal (x) axis by alpha; where alpha ~= 35.264 (arcsin(tan 30)) degrees.
 3. Orthographic projection to the x-y plane.
 
-![alt text](https://wikimedia.org/api/rest_v1/media/math/render/svg/033f451f19ec8dd5ef0fce9ee2fc42bf251973b9)
+![https://wikimedia.org/api/rest_v1/media/math/render/svg/033f451f19ec8dd5ef0fce9ee2fc42bf251973b9](https://wikimedia.org/api/rest_v1/media/math/render/svg/033f451f19ec8dd5ef0fce9ee2fc42bf251973b9)
 
-![alt text](https://wikimedia.org/api/rest_v1/media/math/render/svg/d0e1b61e32bad3678f6d15e6071029bf188968ed)
+![https://wikimedia.org/api/rest_v1/media/math/render/svg/d0e1b61e32bad3678f6d15e6071029bf188968ed](https://wikimedia.org/api/rest_v1/media/math/render/svg/d0e1b61e32bad3678f6d15e6071029bf188968ed)
 
 
