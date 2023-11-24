@@ -22,9 +22,12 @@ There are 8 different orientations for obtain an isometric view, depending on wh
 Matrix multiplication
 
 projection    3d                                2d
+
 matrix         
 [1, 0, 0]  x  [10]  =  [1*10 + 0*20 + 0*30] = [10] 
+
 [0, 1, 0]     [20]     [0*10 + 1*20 + 0*30]   [20]
+
               [30]
 
 To conduct matrix multiplication number of columns of one should equal to the number of rows of the other.
